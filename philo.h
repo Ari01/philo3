@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 04:51:39 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 11:04:52 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:43:56 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_info
 	int				end_sim;
 	int				room;
 	pthread_mutex_t	room_mutex;
-	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 	unsigned long	time_start;
@@ -53,6 +52,7 @@ typedef struct s_philo
 	t_info			*info;
 	pthread_mutex_t	*lf;
 	pthread_mutex_t	*rf;
+	pthread_mutex_t	eat_mutex;
 }	t_philo;
 
 /************* FUNCS **************/
@@ -74,8 +74,7 @@ t_philo			*init_philo(t_info *info, pthread_mutex_t *forks);
 void			run_threads(t_info *info, t_philo *philo);
 
 /*	END SIM	*/
-int				check_death(t_philo *philo, t_info *info);
-int				check_end_sim(t_philo *philo, t_info *info);
+void			check_end_sim(t_philo *philo, t_info *info);
 
 /*	EAT	*/
 void			take_forks(t_philo *philo);

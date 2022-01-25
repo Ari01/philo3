@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 04:48:14 by dchheang          #+#    #+#             */
-/*   Updated: 2021/12/14 07:37:54 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:28:45 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	main(int ac, char **av)
 			return (1);
 		philo = init_philo(&info, forks);
 		if (!philo)
+		{
+			free(forks);
 			return (1);
+		}
 		run_threads(&info, philo);
 		free(philo);
 		free(forks);
