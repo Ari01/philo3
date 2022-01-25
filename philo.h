@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 04:51:39 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/24 13:39:17 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/25 11:04:52 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_philo
 {
 	int				id;
 	int				n_eat;
-	int				status;
 	unsigned long	time_last_meal;
 	t_info			*info;
 	pthread_mutex_t	*lf;
@@ -75,6 +74,7 @@ t_philo			*init_philo(t_info *info, pthread_mutex_t *forks);
 void			run_threads(t_info *info, t_philo *philo);
 
 /*	END SIM	*/
+int				check_death(t_philo *philo, t_info *info);
 int				check_end_sim(t_philo *philo, t_info *info);
 
 /*	EAT	*/

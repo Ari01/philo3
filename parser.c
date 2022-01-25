@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 06:57:29 by dchheang          #+#    #+#             */
-/*   Updated: 2021/12/23 04:31:58 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:59:14 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_philo	*init_philo(t_info *info, pthread_mutex_t *forks)
 	i = 0;
 	while (i < info->n_philo)
 	{
-		philo[i].status = THINKING;
 		philo[i].id = i + 1;
 		philo[i].n_eat = 0;
 		philo[i].info = info;
