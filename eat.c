@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:36:04 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 11:12:53 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:37:28 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	ft_sleep(t_philo *philo, unsigned long t)
 {
 	unsigned long	start;
+	unsigned long	t_die;
 
 	start = get_time();
-	while (!check_end_sim(philo, philo->info))
+	t_die = (unsigned long)philo->info->time_to_die;
+	while (1)
 	{
+		if (get_timediff(philo->time_last_meal) >= t_die)
+			break ;
 		if (get_timediff(start) > t)
 			break ;
 		usleep(1);
@@ -70,8 +74,8 @@ int	eat(t_philo *philo)
 		ft_sleep(philo, philo->info->time_to_die);
 		return (0);
 	}
-	print_status(philo, philo->info, "is eating");
 	philo->time_last_meal = get_time();
+	print_status(philo, philo->info, "is eating");
 	if (philo->info->n_eat >= 0 && philo->n_eat >= 0)
 		philo->n_eat++;
 	ft_sleep(philo, philo->info->time_to_eat);
