@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:36:04 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/26 15:37:28 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:45:33 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	eat(t_philo *philo)
 	if (philo->info->n_eat >= 0 && philo->n_eat >= 0)
 		philo->n_eat++;
 	ft_sleep(philo, philo->info->time_to_eat);
-	//usleep(philo->info->time_to_eat * 1000);
 	drop_forks(philo);
 	pthread_mutex_lock(&philo->info->room_mutex);
 	philo->info->room--;
