@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 07:00:52 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/26 15:45:42 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:15:46 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*run_sim(void *arg)
 			{
 				print_status(philo, philo->info, "is sleeping");
 				ft_sleep(philo, philo->info->time_to_sleep);
+				// reveil trop tard
 				print_status(philo, philo->info, "is thinking");
 			}
 		}

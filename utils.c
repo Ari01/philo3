@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 06:24:31 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 13:36:42 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:29:24 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_atoi(char *s)
 	return (n * sign);
 }
 
-unsigned long	get_time(void)
+long long	get_time(void)
 {
 	struct timeval	tv;
 
@@ -58,9 +58,9 @@ unsigned long	get_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-unsigned long	get_timediff(unsigned long start)
+long long	get_timediff(long long start)
 {
-	unsigned long	end;
+	long long	end;
 
 	end = get_time();
 	return (end - start);
@@ -70,6 +70,6 @@ void	print_status(t_philo *philo, t_info *info, char *msg)
 {
 	pthread_mutex_lock(&info->death_mutex);
 	if (!info->end_sim)
-		printf("%lu %d %s\n", get_timediff(info->time_start), philo->id, msg);
+		printf("%lld %d %s\n", get_timediff(info->time_start), philo->id, msg);
 	pthread_mutex_unlock(&info->death_mutex);
 }

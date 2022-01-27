@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 04:51:39 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 11:04:52 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:33:11 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ typedef struct s_info
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
-	unsigned long	time_start;
+	long long		time_start;
 }	t_info;
 
 typedef struct s_philo
 {
 	int				id;
 	int				n_eat;
-	unsigned long	time_last_meal;
+	long long		time_last_meal;
 	t_info			*info;
 	pthread_mutex_t	*lf;
 	pthread_mutex_t	*rf;
@@ -60,8 +60,8 @@ typedef struct s_philo
 /*	UTILS	*/
 int				check_limit(int n, int sign, int x);
 int				ft_atoi(char *s);
-unsigned long	get_time(void);
-unsigned long	get_timediff(unsigned long start);
+long long		get_time(void);
+long long		get_timediff(long long start);
 void			print_status(t_philo *philo, t_info *info, char *msg);
 
 /*	PARSER	*/
@@ -80,6 +80,6 @@ int				check_end_sim(t_philo *philo, t_info *info);
 /*	EAT	*/
 void			take_forks(t_philo *philo);
 int				eat(t_philo *philo);
-void			ft_sleep(t_philo *philo, unsigned long t);
+void			ft_sleep(t_philo *philo, int t);
 
 #endif
