@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 07:00:52 by dchheang          #+#    #+#             */
-/*   Updated: 2022/02/08 17:10:05 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:39:23 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*run_sim(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->info->death_mutex);
