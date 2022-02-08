@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:36:04 by dchheang          #+#    #+#             */
-/*   Updated: 2022/02/08 15:06:48 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:13:27 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,10 @@ void	ft_sleep(t_philo *philo, long long t)
 
 void	take_forks(t_philo *philo)
 {
-	if (philo->id % 2)
+	pthread_mutex_lock(philo->rf);
+	print_status(philo, philo->info, "has taken a fork");
+	if (philo->info->n_philo != 1)
 	{
-		pthread_mutex_lock(philo->lf);
-		print_status(philo, philo->info, "has taken a fork");
-		if (philo->info->n_philo != 1)
-		{
-			pthread_mutex_lock(philo->rf);
-			print_status(philo, philo->info, "has taken a fork");
-		}
-	}
-	else
-	{
-		pthread_mutex_lock(philo->rf);
-		print_status(philo, philo->info, "has taken a fork");
 		pthread_mutex_lock(philo->lf);
 		print_status(philo, philo->info, "has taken a fork");
 	}
@@ -54,16 +44,8 @@ void	take_forks(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-	if (philo->id % 2)
-	{
-		pthread_mutex_unlock(philo->rf);
-		pthread_mutex_unlock(philo->lf);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->rf);
-		pthread_mutex_unlock(philo->lf);
-	}
+	pthread_mutex_unlock(philo->lf);
+	pthread_mutex_unlock(philo->rf);
 }
 
 int	eat(t_philo *philo)
@@ -81,8 +63,5 @@ int	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->info->death_mutex);
 	ft_sleep(philo, philo->info->time_to_eat);
 	drop_forks(philo);
-	pthread_mutex_lock(&philo->info->room_mutex);
-	philo->info->room--;
-	pthread_mutex_unlock(&philo->info->room_mutex);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:33:29 by dchheang          #+#    #+#             */
-/*   Updated: 2022/02/08 14:56:29 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:29:21 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_death(t_philo *philo, t_info *info)
 	if (get_timediff(philo->time_last_meal) >= (long long)info->time_to_die)
 	{
 		info->end_sim = 1;
-		printf("%lld % d %s\n", get_timediff(info->time_start), philo->id, "died");
+		printf("%lld %d %s\n", get_timediff(info->time_start), philo->id, "died");
 		ret = 1;
 	}
 	pthread_mutex_unlock(&info->death_mutex);
