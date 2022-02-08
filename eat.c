@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:36:04 by dchheang          #+#    #+#             */
-/*   Updated: 2022/02/08 14:35:49 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:06:48 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	drop_forks(t_philo *philo)
 	}
 	else
 	{
-		pthread_mutex_unlock(philo->lf);
 		pthread_mutex_unlock(philo->rf);
+		pthread_mutex_unlock(philo->lf);
 	}
 }
 
@@ -81,5 +81,8 @@ int	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->info->death_mutex);
 	ft_sleep(philo, philo->info->time_to_eat);
 	drop_forks(philo);
+	pthread_mutex_lock(&philo->info->room_mutex);
+	philo->info->room--;
+	pthread_mutex_unlock(&philo->info->room_mutex);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:33:29 by dchheang          #+#    #+#             */
-/*   Updated: 2022/02/08 14:02:21 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:56:29 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	check_end_sim(t_philo *philo, t_info *info)
 		{
 			end_sim = check_death(&philo[i], info);
 			i++;
+			usleep(100);
 		}
 		i = 0;
 		while (!end_sim && i < info->n_philo)
