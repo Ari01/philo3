@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 06:57:29 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 11:27:29 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:02:35 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	init_info(char **av, t_info *info)
 		printf("error: arguments\n");
 		return (0);
 	}
-	if (pthread_mutex_init(&info->print_mutex, NULL)
-		|| pthread_mutex_init(&info->death_mutex, NULL)
+	if (pthread_mutex_init(&info->death_mutex, NULL)
 		|| pthread_mutex_init(&info->room_mutex, NULL))
 	{
 		printf("error: initializing mutex\n");
@@ -79,11 +78,6 @@ t_philo	*init_philo(t_info *info, pthread_mutex_t *forks)
 	philo = malloc(sizeof(*philo) * (info->n_philo));
 	if (!philo)
 		return (NULL);
-	if (pthread_mutex_init(&philo->eat_mutex, NULL))
-	{
-		free(philo);
-		return (NULL);
-	}
 	i = 0;
 	while (i < info->n_philo)
 	{

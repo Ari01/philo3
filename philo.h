@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 04:51:39 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 11:43:56 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:01:44 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_info
 	int				end_sim;
 	int				room;
 	pthread_mutex_t	room_mutex;
-	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
 	unsigned long	time_start;
 }	t_info;
@@ -52,7 +51,6 @@ typedef struct s_philo
 	t_info			*info;
 	pthread_mutex_t	*lf;
 	pthread_mutex_t	*rf;
-	pthread_mutex_t	eat_mutex;
 }	t_philo;
 
 /************* FUNCS **************/

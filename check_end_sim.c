@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:33:29 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/25 12:40:03 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:15:17 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	check_death(t_philo *philo, t_info *info)
 {
-	pthread_mutex_lock(&philo->eat_mutex);
+	int	ret;
+
+	ret = 0;
+	pthread_mutex_lock(&info->death_mutex);
 	if (get_timediff(philo->time_last_meal) >= (unsigned long)info->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->eat_mutex);
-		print_status(philo, philo->info, "died");
-		pthread_mutex_lock(&info->death_mutex);
 		info->end_sim = 1;
-		pthread_mutex_unlock(&info->death_mutex);
-		return (1);
+		printf("%lu % d %s\n", get_timediff(info->time_start), philo->id, "died");
+		ret = 1;
 	}
-	pthread_mutex_unlock(&philo->eat_mutex);
-	return (0);
+	pthread_mutex_unlock(&info->death_mutex);
+	return (ret);
 }
 
 int	check_eat(t_philo *philo, t_info *info)
@@ -35,7 +35,6 @@ int	check_eat(t_philo *philo, t_info *info)
 	ret = 0;
 	if (info->n_eat > 0)
 	{
-		pthread_mutex_lock(&philo->eat_mutex);
 		pthread_mutex_lock(&info->death_mutex);
 		if (philo->n_eat >= info->n_eat)
 		{
@@ -48,7 +47,6 @@ int	check_eat(t_philo *philo, t_info *info)
 			ret = 1;
 		}
 		pthread_mutex_unlock(&info->death_mutex);
-		pthread_mutex_unlock(&philo->eat_mutex);
 	}
 	return (ret);
 }

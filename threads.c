@@ -6,7 +6,7 @@
 /*   By: dchheang <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 07:00:52 by dchheang          #+#    #+#             */
-/*   Updated: 2022/01/26 17:36:09 by dchheang         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:27:39 by dchheang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	check_room(t_info *info)
 		info->room++;
 		ret = 1;
 	}
-	//printf("%lu in room : %d\n", get_timediff(info->time_start), info->room);
 	pthread_mutex_unlock(&info->room_mutex);
 	return (ret);
 }
@@ -35,6 +34,8 @@ void	*run_sim(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		usleep(100);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->info->death_mutex);
@@ -44,16 +45,12 @@ void	*run_sim(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->info->death_mutex);
-		if (check_room(philo->info))
+		take_forks(philo);
+		if (eat(philo))
 		{
-			take_forks(philo);
-			if (eat(philo))
-			{
-				print_status(philo, philo->info, "is sleeping");
-				ft_sleep(philo, philo->info->time_to_sleep);
-				//usleep(philo->info->time_to_sleep * 1000);
-				print_status(philo, philo->info, "is thinking");
-			}
+			print_status(philo, philo->info, "is sleeping");
+			ft_sleep(philo, philo->info->time_to_sleep);
+			print_status(philo, philo->info, "is thinking");
 		}
 	}
 	return (NULL);
